@@ -14,7 +14,7 @@ defmodule HackerNewsApi.Responder do
   defmacro __using__(_) do
     quote do
       require Logger
-      @behaviour HakerNewsApi.Responder
+      @behaviour HackerNewsApi.Responder
 
       @doc false
       @spec handle_response(tuple()) :: :ok
