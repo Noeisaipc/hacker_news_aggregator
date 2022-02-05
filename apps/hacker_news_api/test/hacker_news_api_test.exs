@@ -1,13 +1,14 @@
 defmodule HackerNewsApiTest do
   use ExUnit.Case
+  @limit_of_top_news 50
 
   test "fetch_top_50_news" do
-    news_top_50 = HackerNewsApi.get_top_50()
-    assert Enum.count(news_top_50) == 50
+    news_top_50 = HackerNewsApi.fetch_news_data()
+    assert Enum.count(news_top_50) == @limit_of_top_news
   end
 
   test "sorter_order_top_50_news" do
-    news_top_50 = HackerNewsApi.get_top_50()
+    news_top_50 = HackerNewsApi.fetch_news_data()
     assert Enum.sort(news_top_50, :desc) == news_top_50
   end
 
