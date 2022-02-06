@@ -1,8 +1,10 @@
 defmodule HackerNewsCoreTest do
   use ExUnit.Case
-  doctest HackerNewsCore
 
-  test "greets the world" do
-    assert HackerNewsCore.hello() == :world
-  end
+  #test_persistant_50_news_updated
+
+  #test_fetching_top_50_in_cache
+
+  #test_fetching_news_by_id_in_cache
+
 end
