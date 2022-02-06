@@ -10,6 +10,7 @@ defmodule HackerNewsCore.Application do
     children = [
       # Starts a worker by calling: HackerNewsCore.Worker.start_link(arg)
       # {HackerNewsCore.Worker, arg}
+      {HackerNewsCore.Top50Agent, []},
       {Cachex, name: :news}
     ]
 
