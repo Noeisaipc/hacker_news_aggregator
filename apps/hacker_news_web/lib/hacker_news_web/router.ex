@@ -13,16 +13,19 @@ defmodule HackerNewsWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", HackerNewsWeb do
-    pipe_through :browser
+  # scope "/", HackerNewsWeb do
+  #   pipe_through :browser
 
-    get "/", PageController, :index
-  end
+  #   get "/", PageController, :index
+  # end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HackerNewsWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", HackerNewsWeb do
+    pipe_through :api
+
+    get "/news", NewsController, :index
+    get "/news/:id", NewsController, :show
+  end
 
   # Enables LiveDashboard only for development
   #

@@ -38,8 +38,8 @@ defmodule HackerNewsApi do
 
   @spec send_news(list() | {Integer.t(), list()}) :: list()
   def send_news({_num_stories, stories}),
-    do: Enum.map(stories, fn story -> {story[:id], story} end)
+    do: Enum.map(stories, fn story -> {Integer.to_string(story[:id]), story} end)
 
   def send_news(stories) when is_list(stories),
-    do: Enum.map(stories, fn story -> {story[:id], story} end)
+    do: Enum.map(stories, fn story -> {Integer.to_string(story[:id]), story} end)
 end

@@ -19,8 +19,8 @@ defmodule HackerNewsCore.Monitor do
     Cachex.get!(@table_news, key)
   end
 
-  @spec get_news_table() :: {:ok, list}
-  def get_news_table() do
+  @spec fetch_all_news() :: {:ok, list}
+  def fetch_all_news() do
     @table_news |> Cachex.keys!() |> Enum.sort(:desc) |> Enum.map(&find_news(&1))
   end
 end

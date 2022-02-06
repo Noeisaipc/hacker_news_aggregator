@@ -30,4 +30,12 @@ defmodule HackerNewsCore do
   def find_news(id) do
     Monitor.find_news(id)
   end
+
+  def generate_pagination(page) do
+    Monitor.fetch_all_news()
+    |> Scrivener.paginate(put_page_config(page))
+  end
+
+  defp put_page_config(nil), do: %{page: 1, page_size: 10}
+  defp put_page_config(page_number), do: %{page: page_number, page_size: 10}
 end
