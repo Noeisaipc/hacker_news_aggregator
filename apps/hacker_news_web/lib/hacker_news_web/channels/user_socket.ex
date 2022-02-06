@@ -3,6 +3,7 @@ defmodule HackerNewsWeb.UserSocket do
 
   ## Channels
   # channel "room:*", HackerNewsWeb.RoomChannel
+  channel("news:top50", HakerNewsWeb.Top50Channel)
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
