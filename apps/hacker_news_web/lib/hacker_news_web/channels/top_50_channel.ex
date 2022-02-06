@@ -7,7 +7,7 @@ defmodule HackerNewsWeb.Top50Channel do
 
   @spec join(String.t(), any(), Phoenix.Socket.t()) :: {:ok, Phoenix.Socket.t()} | {:error, map()}
   def join("news:top50", _params, socket) do
-    news = HakerNewsCore.retrive_top_50()
+    news = HackerNewsCore.retrive_top_50()
     {:ok, news, socket}
   end
 
