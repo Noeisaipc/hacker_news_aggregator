@@ -26,7 +26,7 @@ defmodule HackerNewsCore.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:haker_news_api, in_umbrella: true},
+      {:hacker_news_api, in_umbrella: true},
       {:scrivener_list, "~> 2.0"},
       {:cachex, "~> 3.4"}
       # {:dep_from_hexpm, "~> 0.3.0"},

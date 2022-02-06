@@ -10,6 +10,7 @@ defmodule HackerNewsCore.Application do
     children = [
       # Starts a worker by calling: HackerNewsCore.Worker.start_link(arg)
       # {HackerNewsCore.Worker, arg}
+      {Cachex, name: :news}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

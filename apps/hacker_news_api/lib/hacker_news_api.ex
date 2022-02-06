@@ -20,13 +20,16 @@ defmodule HackerNewsApi do
     |> send_news()
   end
 
-  @spec fetch_news_metadata(Stream.t(), {Integer.t(), list()}) :: {:cont, {Integer.t(), list}} | {:halt, list}
-  def fetch_news_metadata(_stream, {num_stories, stories}) when num_stories >= @limit_of_top_news, do: {:halt, Enum.take(stories, @limit_of_top_news)}
+  @spec fetch_news_metadata(Stream.t(), {Integer.t(), list()}) ::
+          {:cont, {Integer.t(), list}} | {:halt, list}
+  def fetch_news_metadata(_stream, {num_stories, stories}) when num_stories >= @limit_of_top_news,
+    do: {:halt, Enum.take(stories, @limit_of_top_news)}
 
   def fetch_news_metadata(stream, {_num_stories, stories}) do
-    next_stories = Enum.map(stream, fn id_item -> Task.async(fn -> Item.fetch(id_item) end) end)
-    |> Enum.map(&Task.await(&1))
-    |> Enum.filter(fn item -> item[:type] == "story" end)
+    next_stories =
+      Enum.map(stream, fn id_item -> Task.async(fn -> Item.fetch(id_item) end) end)
+      |> Enum.map(&Task.await(&1))
+      |> Enum.filter(fn item -> item[:type] == "story" end)
 
     total_stories = stories ++ next_stories
     new_number_stories = Enum.count(total_stories)
@@ -34,7 +37,9 @@ defmodule HackerNewsApi do
   end
 
   @spec send_news(list() | {Integer.t(), list()}) :: list()
-  def send_news({_num_stories, stories}), do: Enum.map(stories, fn story -> {story[:id], story} end)
+  def send_news({_num_stories, stories}),
+    do: Enum.map(stories, fn story -> {story[:id], story} end)
 
-  def send_news(stories) when is_list(stories), do: Enum.map(stories, fn story -> {story[:id], story} end)
+  def send_news(stories) when is_list(stories),
+    do: Enum.map(stories, fn story -> {story[:id], story} end)
 end

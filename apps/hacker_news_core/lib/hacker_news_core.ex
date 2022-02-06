@@ -2,17 +2,17 @@ defmodule HackerNewsCore do
   @moduledoc """
   Documentation for `HackerNewsCore`.
   """
+  alias HackerNewsCore.Monitor
 
-  @doc """
-  Hello world.
+  @spec fetch_top_news :: :ok
+  def fetch_top_news() do
+    HackerNewsApi.fetch_news_data()
+    |> Enum.map(fn story ->
+      HackerNewsCore.Monitor.insert_news(story)
+    end)
+  end
 
-  ## Examples
-
-      iex> HackerNewsCore.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def find_news(id) do
+    HackerNewsCore.Monitor.find_news(id)
   end
 end

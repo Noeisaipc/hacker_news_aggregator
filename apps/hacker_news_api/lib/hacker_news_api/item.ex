@@ -35,7 +35,7 @@ defmodule HackerNewsApi.Item do
   def build_response(response) do
     %{
       id: response["id"],
-      deleted: response["deleted"] || :false,
+      deleted: response["deleted"] || false,
       type: response["type"],
       by: response["by"],
       time: parse_unix_date(response["time"]),
