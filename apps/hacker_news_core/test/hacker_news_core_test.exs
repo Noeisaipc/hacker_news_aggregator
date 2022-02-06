@@ -6,4 +6,10 @@ defmodule HackerNewsCoreTest do
   # test_fetching_top_50_in_cache
 
   # test_fetching_news_by_id_in_cache
+
+  test "test_fetching_news_by_id_in_cache" do
+    news_id = HackerNewsCore.fetch_top_news() |> List.first()
+    news_from_cache =  HackerNewsCore.find_news(news_id)
+    assert news_id == news_from_cache[:id]
+  end
 end
