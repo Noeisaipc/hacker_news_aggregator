@@ -4,16 +4,16 @@ defmodule HackerNewsCore.Application do
   @moduledoc false
 
   use Application
-  alias HackerNewsCore.{Top50Agent, WorkerUpdater}
+  alias HackerNewsCore.{Top50Agent}
 
   @impl true
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: HackerNewsCore.Worker.start_link(arg)
       # {HackerNewsCore.Worker, arg}
+      {Task.Supervisor, name: HakerNewsCore.TaskSupervisor},
       {Top50Agent, []},
-      {Cachex, name: :news},
-      {WorkerUpdater, []}
+      {Cachex, name: :news}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

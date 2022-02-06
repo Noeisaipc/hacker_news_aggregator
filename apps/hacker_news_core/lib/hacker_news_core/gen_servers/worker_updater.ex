@@ -26,5 +26,6 @@ defmodule HackerNewsCore.WorkerUpdater do
 
   defp update_data() do
     HackerNewsCore.fetch_top_news()
+    HackerNewsCore.brocast_top_news()
   end
 end

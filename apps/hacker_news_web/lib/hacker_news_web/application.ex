@@ -4,6 +4,7 @@ defmodule HackerNewsWeb.Application do
   @moduledoc false
 
   use Application
+  alias HackerNewsCore.WorkerUpdater
 
   def start(_type, _args) do
     children = [
@@ -12,7 +13,9 @@ defmodule HackerNewsWeb.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HackerNewsWeb.PubSub},
       # Start the Endpoint (http/https)
-      HackerNewsWeb.Endpoint
+      HackerNewsWeb.Endpoint,
+      {HackerNewsWeb.NewsUpdater, :news_socket_updater},
+      {WorkerUpdater, []}
       # Start a worker by calling: HackerNewsWeb.Worker.start_link(arg)
       # {HackerNewsWeb.Worker, arg}
     ]

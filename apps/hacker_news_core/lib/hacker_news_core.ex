@@ -22,6 +22,13 @@ defmodule HackerNewsCore do
     news
   end
 
+  @spec brocast_top_news :: :ignore
+  def brocast_top_news() do
+    Task.Supervisor.start_child(HakerNewsCore.TaskSupervisor, fn ->
+      GenServer.cast(:news_socket_updater, {:update, retrive_top_50()})
+    end)
+  end
+
   @spec save_top_50(list) :: :ok
   def save_top_50(news) do
     Top50Agent.update(news)
