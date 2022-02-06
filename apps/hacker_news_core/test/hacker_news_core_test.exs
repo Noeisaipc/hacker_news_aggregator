@@ -5,16 +5,21 @@ defmodule HackerNewsCoreTest do
 
   test "test_persistant_50_news_updated" do
     HackerNewsCore.fetch_top_news()
-    assert Enum.count(HackerNewsCore.Top50Agent.value) == 50
+    assert Enum.count(HackerNewsCore.Top50Agent.value()) == 50
   end
 
   # test_fetching_top_50_in_cache
+
+  test "test_fetching_top_50_in_cache" do
+    HackerNewsCore.fetch_top_news()
+    assert Enum.count(HackerNewsCore.retrive_top_50()) == 50
+  end
 
   # test_fetching_news_by_id_in_cache
 
   test "test_fetching_news_by_id_in_cache" do
     news_id = HackerNewsCore.fetch_top_news() |> List.first()
-    news_from_cache =  HackerNewsCore.find_news(news_id)
+    news_from_cache = HackerNewsCore.find_news(news_id)
     assert news_id == news_from_cache[:id]
   end
 end
